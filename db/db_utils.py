@@ -20,6 +20,7 @@ def connect():
 
 def exec_sql_file(path): # use this | insert and .sql only for unit tests | insert queries then  | setup and teardown
     full_path = os.path.join(os.path.dirname(__file__), f'../{path}')
+    full_path = os.path.join(os.path.dirname(__file__), f'../{path}')
     conn = connect()
     cur = conn.cursor()
     with open(full_path, 'r') as file:
