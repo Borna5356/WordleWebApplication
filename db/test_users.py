@@ -41,6 +41,45 @@ class TestChat(unittest.TestCase):
 
         #analyze
         self.assertEqual(expected, actual, "verify_password should have returned " + str(expected) + " but returned " + str(actual))
+    
+    def test_verify_password_false(self):
+        #setup
+        username = "Borneo"
+        password = "Tehran14"
+        user = users.get_user(username)
+        expected = False
 
+        #invoke
+        actual = users.verify_password(password, user)
+
+        #analyze
+        self.assertEqual(expected, actual, "verify_password should have returned " + str(expected) + " but returned " + str(actual))
+    
+    def test_create_user_success(self):
+        #setup
+        username = "tester"
+        email = "tester@gmail.com"
+        password = "test"
+        
+        #invoke
+        users.create_new_user(username, email, password)
+        actual = users.get_user(username)
+
+        #analyze
+        self.assertEqual(username, actual[1], "create_user should have returned " + str(username) + " but returned " + str(actual[1]))
+
+    def test_repeated_username(self):
+        #setup
+        username = "Borneo"
+        email = "bke8431@rit.edu"
+        password = "Tardis5356!!"
+        expected = False
+
+        #invoke
+        actual = users.create_new_user(username, email, password)
+
+        #analyze
+        self.assertEqual(expected, actual, "create_user should have returned " + str(expected) + " but returned " + str(actual))
+        
 if (__name__ == "__main__"):
     unittest.main()

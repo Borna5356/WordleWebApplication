@@ -30,6 +30,22 @@ def verify_password(password, user):
     actual_password = user[3]
     return password == actual_password
 
+def create_new_user(username, email, password):
+    """
+    This creates a new user in the database and makes sure that the
+    username is unique
+
+    """
+    if (get_user(username) != None):
+        return False
+    sql_command = """
+    INSERT INTO users(username, email, password, number_of_games_played, number_of_games_won, win_percentage, total_points) VALUES
+    (%s, %s, %s, 0, 0, 0.0, 0);
+    """
+    values = [username, email, password]
+    db_utils.exec_commit(sql_command, values)
+    return True
+
 def main():
     create_tables()
 
