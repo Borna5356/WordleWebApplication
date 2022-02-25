@@ -9,15 +9,18 @@ def drop_tables():
     Deletes any existing tables
 
     """
-    conn =  db_utils.connect()
-    cur = conn.cursor()
-    drop_sql = """
-        DROP TABLE IF EXISTS wordleStats;
-        DROP TABLE IF EXISTS users;
-     """
-    cur.execute(drop_sql)
-    conn.commit()
-    conn.close()
+    sql_path = "db/drop_tables.sql"
+    db_utils.exec_sql_file(sql_path)
+
+def get_user(username):
+    """
+    This function uses the username to get 
+    the user from the table 
+    """
+
+    sql_command = "SELECT * FROM users WHERE username=%s"
+    values = [username]
+    return db_utils.exec_get_one(sql_command, values)
 
 def main():
     create_tables()
