@@ -8,3 +8,6 @@ CREATE TABLE users(
         win_percentage           Float,
         total_points             int NOT NULL
 );
+
+INSERT INTO users(username, email, password, number_of_games_played, number_of_games_won, win_percentage, total_points) VALUES
+    ('Borneo', 'bornakevin1@gmail.com', 'Tehran14!', 0, 0, 0.0, 0);
